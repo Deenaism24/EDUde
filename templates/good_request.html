@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block else_link %}
+<link rel="stylesheet" href="../static/css/log_up.css">
+<link rel="stylesheet" href="../static/css/log__in.css">
+<link rel="stylesheet" href="../static/css/log_success.css">
+{% endblock %}
+
+{% block content %}
+
+<body class="bodys">
+<div>
+<div class="div_normal">
+    <div class="div_mes">
+        <p class="success">Вы успешно зарегистрировались</p>
+        <img src="../static/img/check.png" class="img_suc">
+    </div>
+    <br>
+    <div class="div_b">
+        <a href="/" class="a_btn">На главную</a>
+    </div>
+</div>
+</div>
+</body>
+
+{% endblock %}

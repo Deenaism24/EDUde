@@ -1,0 +1,27 @@
+{% extends "base_profile.html" %}
+
+{% block add_class_to_teacher %}
+    <a class="btn btn_add lis form_btns add_new_class" href="/new_class">Добавить класс</a>
+{% endblock %}
+{% block students_of_teacher %}
+<table class="table table-borderless tab container tbl_class">
+       <thead>
+    <tr class='tr1'>
+        <th scope="col">id</th>
+        <th scope="col">Ученик</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for student in students %}
+    <tr class='tr_room'>
+        <td class="btn_add lis td1" ><strong>{{ student.id }}</strong></td>
+        <td class="btn_add lis td2"><p>{{ student.name }} {{ student.surname }}</p>
+        </td>
+    </tr>
+
+  {% endfor %}
+
+  </tbody>
+
+</table>
+            {% endblock %}

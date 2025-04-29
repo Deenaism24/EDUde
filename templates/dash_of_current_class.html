@@ -1,0 +1,90 @@
+{% extends "base_dashboard.html" %}
+    {% block else_link %}
+    <link rel="stylesheet" href="{{ link_css }}">
+<link rel="stylesheet" href="{{ link_css1 }}">
+<link rel="stylesheet" href="{{ link_css2 }}">
+    {% endblock %}
+{% block buttons %}
+{% if is_teacher %}
+<div class='flx'>
+<div class="container add div_auto" >
+    <div>
+    <a href="/new_task/{{ classroom_id }}" class="save add_a" > Добавить задание </a>
+    </div>
+</div>
+    <div class="container add div_auto">
+    <div >
+    <a href="/edit_classroom/{{ classroom_id }}" class="save add_a" > Редактировать </a>
+    </div>
+</div>
+<div class="container add d3 div_auto">
+    <div>
+    <a href="/new_student/{{ classroom_id }}" class="save add_a" > Добавить учеников </a>
+    </div>
+</div>
+    <div class="container add d3 div_auto" >
+    <div>
+    <a href="/delete_classroom/{{ classroom_id }}" class="save add_a" > Удалить класс </a>
+    </div>
+</div>
+</div>
+{% endif %}
+{% endblock %}
+{% block tasks %}
+<style>
+.names{
+max-width: 300px;
+overflow:scroll;
+word-wrap: break-word;
+}
+td::-webkit-scrollbar { width: 0; }
+.t2{
+width: 400px;
+}
+.delete{
+margin-right: 20px
+}
+.div_auto{
+margin: auto
+}
+</style>
+    {% for task in tasks %}
+    <tr>
+      <th scope="row">{{ task.id }}</th>
+      <td class='names' ><p>{{ task.name }}</p></td>
+        <td><p>{{ task.deadline }}</p></td>
+      <td class="names"><p>{{ task.description }}</p></td>
+        <td><p>{{ task.link }}</p></td>
+        {% if is_teacher %}
+        <td ><a href="/delete_task/{{ task.id }}" class="delete"> Удалить</a><br><br>
+        <a href="/edit_task/{{ task.id }}" class="delete"> Редактировать</a>
+        </td>
+        {% else %}
+        <td><a href="/send_task/{{ task.id }}" class="delete"> Отправить </a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+{% endblock %}
+
+{% block study %}
+{% if is_teacher %}
+<table class="table table-borderless tab container t2">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+        <th scope="col">ФИО ученика</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for student in students %}
+    <tr>
+      <th scope="row">{{ student.id }}</th>
+      <td><p>{{ student.surname}} {{ student.name }}</p></td>
+
+        <td><a href="/delete_student/{{ classroom_id }}/{{ student.id }}" class="delete">Удалить</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+    </table>
+{% endif %}
+{% endblock %}

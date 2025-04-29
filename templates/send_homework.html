@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block else_link %}
+<link rel="stylesheet" href="../static/css/log_up.css">
+<link rel="stylesheet" href="../static/css/log__in.css">
+<link rel="stylesheet" href="../static/css/send_h_w.css">
+{% endblock %}
+
+{% block content %}
+<div class="form-div">
+ <form action="" method="post" enctype="multipart/form-data">
+     {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
+        <fieldset>
+          <legend>Отправка задания</legend>
+     <div class="form">
+         <textarea name="text" placeholder="Оставьте комментарий"></textarea>
+        <input type="file" name="1" accept="image/*,.docx,.txt,.xlsx"><br>
+        <div class="add ad_file">Добавить файл</div>
+        </div>
+        </fieldset>
+     <div class="buttons">
+         <button type="submit">Отправить</button>
+        </div>
+           </form>
+</div>
+<script>
+    var $count = 2;
+    var $add = document.getElementsByClassName('add')[0];
+    var $form = document.getElementsByClassName('form')[0];
+    $add.addEventListener('click', function(event) {
+      var $input = document.createElement('input');
+      $input.type = 'file';
+      $input.placeholder = 'Кол-во';
+      $input.name = $count.toString();
+      $count++;
+      $input.classList.add('amount');
+      $form.insertBefore($input, $add);
+});
+</script>
+{% endblock %}

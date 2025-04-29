@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block else_link %}
+    <link rel="stylesheet" href="../static/css/table.css">
+    <link rel="stylesheet" href="../static/css/profs.css">
+<link rel="stylesheet" href="../static/css/prof_more.css">
+<link rel="stylesheet" href="../static/css/password.css">
+    {% endblock %}
+{% block about_pr %}
+<li class="nav-item ab">
+        <button id="userButton" class='btn_copy'>
+            Скопировать пароль<br>
+        <small class='sm_never'>Никому не разглашайте данный пароль</small>
+        </button>
+      </li>
+        {% endblock %}
+    {% block content %}
+<div class="photo" style="width: auto; height: auto;box-shadow:none">
+    {% if is_teacher %}
+<div style="display: flex;">
+        <img src="../static/img/teacher.png" style="width: 100px; height: 100px;vertical-align: middle; box-shadow: none">
+    <h2 style="margin-top: 68px;margin-left: -20px">Хорошей вам работы!</h2>
+</div>
+    {% else %}
+    <div style="display: flex;">
+        <img src="../static/img/student.png" style="width: 100px; height: 100px;vertical-align: middle; box-shadow: none;">
+    <h2 style="margin-top: 68px;margin-left: -20px">Хорошей вам учебы!</h2>
+        </div>
+    {% endif %}
+    <h6 class="name_user">Имя пользователя: {{ name }} {{ surname }}</h6>
+    <h6 class="name_user">Id пользователя: {{ id }}</h6>
+    <a href="/edit_profile" class="btn btn_add lis form_btns sv">Изменить</a>
+</div>
+<div class="class">
+        <div class="flex_box">
+            <div>
+    <table class="table table-borderless tab container tbl_class">
+       <thead>
+    <tr class='tr1'>
+        <th scope="col">id</th>
+        <th scope="col">Класс\предмет</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for classroom in classrooms %}
+    <tr class='tr_room'>
+        <td class="btn_add lis td1"><strong>{{ classroom.id }}</strong></td>
+        <td class="btn_add lis td2"><a href="/tasks/{{ classroom.id }}">{{ classroom.name }}, {{ classroom.subject }}</a>
+        </td>
+    </tr>
+
+  {% endfor %}
+
+  </tbody>
+
+</table>
+                {% block add_class_to_teacher %}
+
+{% endblock %}
+        </div>
+        {% block students_of_teacher %}
+            {% endblock %}
+
+        </div>
+
+        </div>
+
+<div class=' reques'>
+    <div class="point">
+        <h2 class="li_of_s" style="margin-right: 80px;">Заявки и приглашения</h2>
+<ul class="list-group list-group-flush">
+   {% for invite in invites %}
+        <li class="btn_add lis req_li"><br>
+    {{ invite.__repr__() }}
+            <br><a class="btn btn_add lis form_btns sv" href="/accept_invite/{{invite.id}}">Принять</a>
+            <br><a class="btn btn_add lis form_btns sv" href="/refuse_invite/{{invite.id}}">Отклонить</a>
+        </li>
+   {% endfor %}
+
+</ul>
+    </div>
+    <a class="btn btn_add lis form_btns invt" href="/invite">Пригласить</a>
+     </div>
+ <script>
+var button = document.getElementById("userButton");
+button.addEventListener("click", function (popa){
+var copytext = document.createElement("input");
+copytext.value = "090909000";
+document.body.appendChild(copytext);
+copytext.select();
+document.execCommand("copy");
+document.body.removeChild(copytext);
+});
+</script>
+{% endblock %}

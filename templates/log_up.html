@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block else_link %}
+<link rel="stylesheet" href="../static/css/log_up.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="form-div">
+ <form action="" method="post">
+     {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
+        <fieldset>
+          <legend>Регистрация пользователя</legend>
+
+            {{ form.name.label }}<br>
+        {{ form.name(placeholder="Иван") }}<br>
+        {% for error in form.name.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+
+
+            {{ form.surname.label }}<br>
+        {{ form.surname( placeholder="Иванов") }}<br>
+        {% for error in form.surname.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+
+            {{ form.email.label }}<br>
+        {{ form.email(placeholder="ivanov_@mail.ru", type="email") }}<br>
+        {% for error in form.email.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+
+            {{ form.password.label }}<br>
+        {{ form.password(type="password") }}<br>
+        {% for error in form.password.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+
+                    {{ form.check_password.label }}<br>
+        {{ form.check_password(type="password") }}<br>
+        {% for error in form.check_password.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+
+        {% for subfield in form.user_type %}
+            <div class="custom-control custom-radio custom-control-inline radio_div">
+                {{ subfield(type="radio", class="custom-control-input") }}
+                {{ subfield.label(class="custom-control-label") }}
+
+            </div>
+            {% endfor %}
+            {% for error in form.user_type.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+        <div>{{ message }}</div>
+
+        </fieldset>
+
+        <div class="buttons">
+        {{ form.submit(type="submit") }}<br>
+        {% for error in form.submit.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+        </div>
+      </form>
+</div>
+{% endblock %}

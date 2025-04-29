@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block else_link %}
+    <link rel="stylesheet" href="../static/css/labels.css">
+    <link rel="stylesheet" href="../static/css/about.css">
+    <link rel="stylesheet" href="../static/css/log__in.css.css">
+<link rel="stylesheet" href="../static/css/new_task.css">
+{% endblock %}
+
+{% block content %}
+<form method="post">
+  <div class="form-check" style="width: 800px">
+      {% for student in students %}
+  <input class="form-check-input" type="checkbox" value="{{ student.id }}" id="defaultCheck1" name="checkbox">
+  <label class="form-check-label" for="defaultCheck1">
+    {{student.name}} {{student.surname}}
+  </label>
+      {% endfor %}
+</div>
+  <div class="buttons">
+        <input type="submit" value="Отправить">
+        </div>
+</form>
+{% endblock %}

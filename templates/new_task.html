@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block else_link %}
+
+<link rel="stylesheet" href="../static/css/log__in.css.css">
+<link rel="stylesheet" href="../static/css/new_task.css">
+{% endblock %}
+{% block content %}
+  <body>
+    <main>
+      <form action="" method="post">
+        {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
+        <fieldset>
+          <legend>Добавление задания</legend>
+          {{ form.name_of_task.label }}
+      {{ form.name_of_task(placeholder="Введите тут...", class="two-third-width") }}
+      {% for error in form.name_of_task.errors %}
+      <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+          {{ form.task.label }}
+      {{ form.task(placeholder="Заполните здесь...", class="two-third-width") }}
+      {% for error in form.task.errors %}
+      <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+          {{ form.deadline.label }}
+      {{ form.deadline(class="half-width", type='datetime-local', style="width:250px") }}
+      {% for error in form.task.errors %}
+      <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+          {{ form.link.label }}
+      {{ form.link(class="half-width", type='email', style="width:250px", value=link ) }}
+      {% for error in form.task.errors %}
+      <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+        </fieldset>
+        <div class="buttons">
+          {{ form.submit(type="submit") }}
+    {% for error in form.submit.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+        </div>
+      </form>
+    </main>
+    <footer class="page-footer"></footer>
+  </body>
+{% endblock %}

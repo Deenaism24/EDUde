@@ -1,0 +1,26 @@
+{% extends "very_base.html" %}
+{% block else_link %}
+    <link rel="stylesheet" href="../static/css/api.css">
+{% endblock %}
+{% block modules %}
+<body>
+<div>
+<header>
+    <nav class="navbar navbar-light">
+        <h1>Api приложения EdudE</h1>
+        <div><a href="/" class="main_p">На главную</a></div>
+    </nav>
+</header>
+</div>
+<main>
+    <div class="api">
+        <div >
+            <p>
+              На этой страницы представлена документация всех существующих версий API портала edude
+        </p>
+        </div>
+    </div>
+    <a href="/api/1.0">API v1.0</a>
+</main>
+</body>
+{% endblock %}
